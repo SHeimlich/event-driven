@@ -1,0 +1,62 @@
+<html>
+  <head>
+    <link rel="stylesheet" href='/static/style.css' />
+    <script>
+      function getXMLObj(){
+        var x = new XMLHttpRequest();
+        x.onreadystatechange = function() {
+          if(this.readyState == 4 && this.status == 200) {
+            console.log(this.responseText);
+            return(this.responseText);
+          };
+        };
+        return x;
+      }
+
+      function go(direction) {
+        console.log("go forward");
+        var x = getXMLObj();
+        x.open("POST", "\\", false);
+        x.send("outA:"+direction);
+      }
+
+      function get(sensor) {
+        var x = new XMLHttpRequest();
+        x.onreadystatechange = function() {
+          if(this.readyState == 4 && this.status == 200) {
+            return(this.responseText);
+          }
+        };
+        x.open("POST", "\\", true);
+        x.send(sensor+":get");
+ 
+        return(x.responseText);       
+      }
+
+      function test() {
+        var val = get("in1");
+  
+        go("forward");
+        while(val.in1 == 0) {
+          val = get("in1");
+          console.log(val);
+        };
+        go("stop");
+      }
+    </script>
+  </head>
+
+  <body><center>
+    <div class="boxy"> <!-- Found out how to add boxes at: http://www.thesitewizard.com/css/rectangular-box-border.shtml -->
+      <h1>Hello there. My name is Eve.</h1>
+      <select id="output1">
+        <option value="forward">Forward</option>
+        <option value="backward">Backward</option>
+        <option value="stop">Stop</option>
+      </select>
+      <button onclick="go(document.getElementById('output1').value)">Send</button>
+      <button onclick="get('in1')">Receive</button>
+      <button onclick="test()">Test</button>
+    </div> 
+  </body>
+</html>

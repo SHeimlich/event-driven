@@ -1,0 +1,45 @@
+<html>
+  <head>
+    <link rel="stylesheet" href='/static/style.css' />
+    <script>
+      function getXMLObj(){
+        var x = new XMLHttpRequest();
+        x.onreadystatechange = function() {
+          if(this.readyState == 4 && this.status == 200) {
+            console.log(this.responseText);
+          };
+        };
+        return x;
+      }
+
+      function go(str direction) {
+        console.log("go forward");
+        var x = getXMLObj();
+        x.open("POST", "\\", false);
+        x.send("outA:"+direction);
+      }
+
+
+    </script>
+  </head>
+
+  <body><center>
+    <div class="boxy"> <!-- Found out how to add boxes at: http://www.thesitewizard.com/css/rectangular-box-border.shtml -->
+      <h1>Hello there. My name is Eve.</h1>
+<!      <form action ="/" method="POST">
+	<input type="radio" name="direction" value="forward" /> Forward
+	<input type="radio" name="direction" value="backward" /> Backward
+	<input type="radio" name="direction" value="stop" /> Stop
+        <p>Hello, world!</p>
+	<br>
+	<input type="submit" value="Submit">
+	<input type="reset" value="Reset">
+    </div>
+>
+    <div class = 'boxy">
+      <button id="forward" onclick="go('forward')">Forward</button>
+      <button id="backward" onclick="go('backward')">Backward</button>
+      <button id="stop" onclick="go('stop')">Stop</button>
+    </div> 
+  </body>
+</html>

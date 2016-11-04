@@ -1,0 +1,129 @@
+
+<html>
+  <head>
+    <link rel="stylesheet" href='/static/style.css' />
+    <script>
+      function run(toSend) {
+        var x = new XMLHttpRequest();
+        if(toSend == null) {
+          var toSend = {};
+        }
+        x.onreadystatechange = function() {
+          if(this.readyState == 4 && this.status == 200) {
+            console.log(x.responseText);
+            var out1 = document.getElementById("out1").value;
+            var out2 = document.getElementById("out2").value;
+            var out3 = document.getElementById("out3").value;
+            var out4 = document.getElementById("out4").value;
+            var j = JSON.parse(x.responseText);
+            if(j["in1"] == document.getElementById("in1").value) {
+              console.log("in1!");
+              toSend[out1] = document.getElementById("direction1").value;
+            }
+            if(j["in2"] == document.getElementById("in2").value) {
+              console.log("in2!");
+              toSend[out2] = document.getElementById("direction2").value;
+            }
+            if(j["in3"] == document.getElementById("in3").value) {
+              console.log("in3!");
+              toSend[out3] = document.getElementById("direction3").value;
+            }
+            if(j["in4"] == document.getElementById("in4").value) {
+              console.log("in4!");
+              toSend[out4] = document.getElementById("direction4").value;
+            }
+
+            run(toSend);
+          }
+        };
+        x.open("POST", "\\", true);
+        console.log("toSend = "+ JSON.stringify(toSend));
+        x.send(JSON.stringify(toSend));       
+      }
+    </script>
+  </head>
+
+  <body><center>
+    <div class="boxy"> <!-- Found out how to add boxes at: http://www.thesitewizard.com/css/rectangular-box-border.shtml -->
+      <h1>Hello there. My name is Eve.</h1>
+      <button onclick="run()">Run</button>
+    </div>
+    <div class="boxy">
+      <h2>Input 1</h2>
+      <select id="in1">
+        <option value ="1">Touched</option>
+        <option value="0">Released</option>
+      </select>
+      <select id="out1">
+        <option value="outA">Port A</option>
+        <option value="outB">Port B</option>
+        <option value="outC">Port C</option>
+        <option value="outD">Port D</option>
+      </select>
+      <select id="direction1">
+        <option value="forward">Forward</option>
+        <option value="backward">Backward</option>
+        <option value="stop">Stop</option>
+      </select>
+     </div>
+     <div class="boxy">
+      <h2>Input 2</h2>
+      <select id="in2">
+        <option value="1">Touched</option>
+        <option value="0">Released</option>
+      </select>
+      <select id="out2">
+        <option value="outA">Port A</option>
+        <option value="outB">Port B</option>
+        <option value="outC">Port C</option>
+        <option value="outD">Port D</option>
+      </select>
+      <select id="direction2">
+        <option value="forward">Forward</option>
+        <option value="backward">Backward</option>
+        <option value="stop">Stop</option>
+      </select>
+    </div>
+ 
+
+    <div class="boxy">
+      <h2>Input 3</h2>
+      <select id="in3">
+        <option value ="1">Touched</option>
+        <option value="0">Released</option>
+      </select>
+      <select id="out3">
+        <option value="outA">Port A</option>
+        <option value="outB">Port B</option>
+        <option value="outC">Port C</option>
+        <option value="outD">Port D</option>
+      </select>
+      <select id="direction3">
+        <option value="forward">Forward</option>
+        <option value="backward">Backward</option>
+        <option value="stop">Stop</option>
+      </select>
+    </div>
+
+    <div class="boxy">
+      <h2>Input 4</h2>
+      <select id="in4">
+        <option value ="1">Touched</option>
+        <option value="0">Released</option>
+      </select>
+      <select id="out4">
+        <option value="outA">Port A</option>
+        <option value="outB">Port B</option>
+        <option value="outC">Port C</option>
+        <option value="outD">Port D</option>
+      </select>
+      <select id="direction4">
+        <option value="forward">Forward</option>
+        <option value="backward">Backward</option>
+        <option value="stop">Stop</option>
+      </select>
+    </div>
+
+
+  </body>
+</html>
