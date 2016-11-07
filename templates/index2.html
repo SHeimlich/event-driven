@@ -69,14 +69,15 @@
             var pairs = document.getElementsByClassName("boxy")
 
             for (i = 0; i < pairs.length; i++) {
-              var id = pairs[0].id;
-
+              var id = pairs[i].id;
+              console.log("id = " + id);
               var port = document.getElementById("port" + id).value;
-              var value = document.getElementById("in" + id).value;
+              var value = parseInt(document.getElementById("in" + id).value);
               var out = document.getElementById("out" + id).value;
               var direction = document.getElementById("direction" + id).value;
 
-              if(j[port] == j[value]) {
+              if(j[port] == value) {
+                console.log("because port " + port + " = " + value + ", setting " + port + " to " + direction);
                 toSend[out] = direction;
               }
 
@@ -94,7 +95,7 @@
   </head>
 
   <body><center>
-    <div class="boxy"> <!-- Found out how to add boxes at: http://www.thesitewizard.com/css/rectangular-box-border.shtml -->
+    <div> <!-- Found out how to add boxes at: http://www.thesitewizard.com/css/rectangular-box-border.shtml -->
       <h1>Hello there. My name is Eve.</h1>
       <button onclick="addTrigger()">Add Trigger</button>
       <button onclick="run()">Run</button>
