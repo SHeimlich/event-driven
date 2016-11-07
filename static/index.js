@@ -2,9 +2,9 @@ var triggers = 0;
 function getTriggerHTML(port) {
   var portType = document.getElementById("setup" + port).value;
   
-  var str = '<div class="boxy" id=' + triggers + '>'
+  var str = '<div class="pair" id=' + triggers + '>'
 
-  str = str + "\n" + '<select class = "port" id="port' + triggers + '">';
+  str = str + "\n" + '<select class = "triggerPort" id="triggerPort' + triggers + '">';
   str = str + "\n" + '<option value="in' + port
   str = str + '">Port ' + port + '</option>';
   str = str + "\n" + '</select>';
@@ -17,8 +17,8 @@ function getTriggerHTML(port) {
     str = str + "\n" + '</select>';
 
 
-    str = str + "\n" + '<textarea class="in" rows="1" cols="10"'
-    str = str + 'id="in' + triggers + '">';
+    str = str + "\n" + '<textarea class="triggerValue" rows="1" cols="10"'
+    str = str + 'id="triggerValue' + triggers + '">';
     str = str + "\n" + '</textarea>';
     
 
@@ -28,20 +28,20 @@ function getTriggerHTML(port) {
     str = str + "\n" + '<option value="equal">is</option>';
     str = str + "\n" + '</select>';
 
-    str = str + "\n" + '<select class="in" id="in' + triggers + '">';
+    str = str + "\n" + '<select class="triggerValue" id="triggerValue' + triggers + '">';
     str = str + "\n" + '<option value ="1">Touched</option>';
     str = str + "\n" + '<option value="0">Released</option>';
     str = str + "\n" + '</select>';
   }
 
-  str = str + "\n" + '<select class = "out" id="out' + triggers + '">';
+  str = str + "\n" + '<select class = "actionPort" id="actionPort' + triggers + '">';
   str = str + "\n" + '<option value="outA">Port A</option>';
   str = str + "\n" + '<option value="outB">Port B</option>';
   str = str + "\n" + '<option value="outC">Port C</option>';
   str = str + "\n" + '<option value="outD">Port D</option>';
   str = str + "\n" + '</select>';
 
-  str = str + "\n" + '<select class="direction" id="direction' + triggers + '">';
+  str = str + "\n" + '<select class="action" id="action' + triggers + '">';
   str = str + "\n" + '<option value="forward">Forward</option>';
   str = str + "\n" + '<option value="backward">Backward</option>';
   str = str + "\n" + '<option value="stop">Stop</option>';
@@ -80,16 +80,15 @@ function run(toSend) {
       var ins = []
       var outs = []
       var directions = []
-      var pairs = document.getElementsByClassName("boxy")
+      var pairs = document.getElementsByClassName("pair")
 
       for (i = 0; i < pairs.length; i++) {
         var id = pairs[i].id;
-        console.log("id = " + id);
-        var port = document.getElementById("port" + id).value;
-        var value = parseInt(document.getElementById("in" + id).value);
+        var port = document.getElementById("triggerPort" + id).value;
+        var value = parseInt(document.getElementById("triggerValue" + id).value);
         var compare =document.getElementById("compare" + id).value;
-        var out = document.getElementById("out" + id).value;
-        var direction = document.getElementById("direction" + id).value;
+        var out = document.getElementById("actionPort" + id).value;
+        var direction = document.getElementById("action" + id).value;
 
         if(compare == "greater") {
           if(j[port] > value) {
