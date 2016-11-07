@@ -5,7 +5,9 @@
     <script>
 
       var triggers = 0;
-      function getTriggerHTML() {
+      function getTriggerHTML(port) {
+        var portType = document.getElementById("setup" + port).value;
+        
         var str = '<div class="boxy" id=' + triggers + '>'
 
         str = str + "\n" + '<select class = "port" id="port' + triggers + '">';
@@ -15,10 +17,26 @@
         str = str + "\n" + '<option value="in4">Port 4</option>';
         str = str + "\n" + '</select>';
 
-        str = str + "\n" + '<select class="in" id="in' + triggers + '">';
-        str = str + "\n" + '<option value ="1">Touched</option>';
-        str = str + "\n" + '<option value="0">Released</option>';
-        str = str + "\n" + '</select>';
+        if(portType != "touch") {
+          str = str + "\n" + '<select class="compare" id="compare' + triggers + '">';
+          str = str + "\n" + '<option value ="greater">Greater than</option>';
+          str = str + "\n" + '<option value="less">Less than</option>';
+          str = str + "\n" + '<option value="equal">Equal to</option>';
+          str = str + "\n" + '</select>';
+
+
+          str = str + "\n" + '<textarea class="in" rows="1" cols="10"'
+          str = str + 'id="in' + triggers + '">';
+          str = str + "\n" + '</textarea>';
+          
+
+        }
+        else {
+          str = str + "\n" + '<select class="in" id="in' + triggers + '">';
+          str = str + "\n" + '<option value ="1">Touched</option>';
+          str = str + "\n" + '<option value="0">Released</option>';
+          str = str + "\n" + '</select>';
+        }
 
         str = str + "\n" + '<select class = "out" id="out' + triggers + '">';
         str = str + "\n" + '<option value="outA">Port A</option>';
@@ -39,8 +57,8 @@
         return str;
       }
 
-      function addTrigger() {
-        document.getElementById("main").innerHTML = document.getElementById("main").innerHTML + getTriggerHTML();
+      function addTrigger(port) {
+        document.getElementById("main").innerHTML = document.getElementById("main").innerHTML + getTriggerHTML(port);
         triggers++;
       }
 
@@ -97,7 +115,48 @@
   <body><center>
     <div> <!-- Found out how to add boxes at: http://www.thesitewizard.com/css/rectangular-box-border.shtml -->
       <h1>Hello there. My name is Eve.</h1>
-      <button onclick="addTrigger()">Add Trigger</button>
+      <div>
+        Port 1:
+        <select id="setup1">
+          <option value="">None</option>
+          <option value="touch">Touch</option>
+          <option value="light">Light</option>
+          <option value="ultrasonic">Ultrasonic</option>
+          <option value="gyro">Gyro</option>
+        </select>
+
+        Port 2:
+        <select id="setup2">
+          <option value="">None</option>
+          <option value="touch">Touch</option>
+          <option value="light">Light</option>
+          <option value="ultrasonic">Ultrasonic</option>
+          <option value="gyro">Gyro</option>
+        </select>
+      
+        Port 3:
+        <select id="setup3">
+          <option value="">None</option>
+          <option value="touch">Touch</option>
+          <option value="light">Light</option>
+          <option value="ultrasonic">Ultrasonic</option>
+          <option value="gyro">Gyro</option>
+        </select>
+      
+        Port 4:
+        <select id="setup4">
+          <option value="">None</option>
+          <option value="touch">Touch</option>
+          <option value="light">Light</option>
+          <option value="ultrasonic">Ultrasonic</option>
+          <option value="gyro">Gyro</option>
+        </select>
+      </div>
+
+      <button onclick="addTrigger(1)">Add Trigger to Port 1</button>
+      <button onclick="addTrigger(2)">Add Trigger to Port 2</button>
+      <button onclick="addTrigger(3)">Add Trigger to Port 3</button>
+      <button onclick="addTrigger(4)">Add Trigger to Port 4</button>
       <button onclick="run()">Run</button>
     </div>
     <div id="main"></div>
