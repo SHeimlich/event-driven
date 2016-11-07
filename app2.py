@@ -37,20 +37,8 @@ def index():
     print("Command Received")
     print(request.data)
     if request.method == "POST":
-        if request.data == "in1:get":
-            print("I am here!")
-            return(jsonify({"in1":s1.value()}))
-        if request.data == "outA:forward":
-            ma.run_forever(duty_cycle_sp = 40)
-            return(jsonify({"outA":"forward"}))
-        if request.data == "outA:backward":
-            ma.run_forever(duty_cycle_sp = -40)
-            return(jsonify({"outA":"backward"}))
-        if request.data == "outA:stop":
-            ma.stop()
-            return(jsonify({"outA":"stop"}))
         if request.data == "get":
-	    return getInputs()
+	        return getInputs()
         else:
             j = json.loads(request.data)
             if request.data.find('outA') >-1:
@@ -83,16 +71,7 @@ def index():
                     md.stop();
             print("creating return statement")
             return getInputs();
-
             
-            #touch1 = 0
-            #while(not ts2.value()):
-            #    if(ts1.value() and not touch1):
-            #        m.run_forever(duty_cycle_sp = 40)
-            #        print("touch 1 hit")
-            #    if(not ts1.value()):
-            #        touch1 = 0;
-            #m.stop()
         return render_template('index2.html')
 
 @app.route('/1')
