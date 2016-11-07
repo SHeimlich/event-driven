@@ -30,6 +30,10 @@
 
         }
         else {
+          str = str + "\n" + '<select class="compare" id="compare' + triggers + '">';
+          str = str + "\n" + '<option value="equal">is</option>';
+          str = str + "\n" + '</select>';
+
           str = str + "\n" + '<select class="in" id="in' + triggers + '">';
           str = str + "\n" + '<option value ="1">Touched</option>';
           str = str + "\n" + '<option value="0">Released</option>';
@@ -89,14 +93,25 @@
               console.log("id = " + id);
               var port = document.getElementById("port" + id).value;
               var value = parseInt(document.getElementById("in" + id).value);
+              var compare =document.getElementById("compare" + id).value;
               var out = document.getElementById("out" + id).value;
               var direction = document.getElementById("direction" + id).value;
 
-              if(j[port] == value) {
-                console.log("because port " + port + " = " + value + ", setting " + port + " to " + direction);
-                toSend[out] = direction;
+              if(compare == "greater") {
+                if(j[port] > value) {
+                  toSend[out] = direction;
+                }
               }
-
+              else if(compare == "less") {
+                if(j[port] < value) {
+                  toSend[out] = direction;
+                }
+              }
+              else if (compare == "equal") {
+                if(j[port] == value) {
+                  toSend[out] = direction;
+                }
+              }
             }
 
             run(toSend);
