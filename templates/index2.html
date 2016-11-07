@@ -11,10 +11,8 @@
         var str = '<div class="boxy" id=' + triggers + '>'
 
         str = str + "\n" + '<select class = "port" id="port' + triggers + '">';
-        str = str + "\n" + '<option value="in1">Port 1</option>';
-        str = str + "\n" + '<option value="in2">Port 2</option>';
-        str = str + "\n" + '<option value="in3">Port 3</option>';
-        str = str + "\n" + '<option value="in4">Port 4</option>';
+        str = str + "\n" + '<option value="in' + port
+        str = str + '">Port ' + port + '</option>';
         str = str + "\n" + '</select>';
 
         if(portType != "touch") {
