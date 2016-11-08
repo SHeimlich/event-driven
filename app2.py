@@ -20,10 +20,20 @@ s4 = ev3.Sensor('in4')
 
 def getInputs():
     return(jsonify({
-    "in1":s1.value(),
-    "in2":s2.value(),
-    "in3":s3.value(),
-    "in4":s4.value()}));
+        "in1":s1.value(),
+        "in2":s2.value(),
+        "in3":s3.value(),
+        "in4":s4.value()})
+    );
+
+def setupInput():
+    return(jsonify({
+
+        "in1":s1.modes,
+        "in2":s2.modes,
+        "in3":s3.modes,
+        "in4":s4.modes})
+    );
 
 
 app = Flask(__name__)
@@ -39,6 +49,8 @@ def index():
     if request.method == "POST":
         if request.data == "get":
 	        return getInputs()
+        elif requst.data == "setup":
+            return setupInput()
         else:
             j = json.loads(request.data)
             if request.data.find('outA') >-1:
@@ -71,7 +83,7 @@ def index():
                     md.stop();
             print("creating return statement")
             return getInputs();
-            
+
         return render_template('index2.html')
 
 @app.route('/1')

@@ -115,3 +115,21 @@ function run(toSend) {
   console.log("toSend = "+ JSON.stringify(toSend));
   x.send(JSON.stringify(toSend));       
 }
+
+
+window.onload = function() {
+  var x = new XMLHttpRequest();
+
+  
+  x.onreadystatechange = function() {
+    if(this.readyState == 4 && this.status == 200) {
+      console.log(x.responseText);
+      var j = JSON.parse(x.responseText);
+      console.log(j);
+    }
+  }
+
+  x.open("POST", "\\", true);
+  x.send("setup");
+
+}
