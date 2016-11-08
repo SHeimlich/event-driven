@@ -49,7 +49,7 @@ def index():
     if request.method == "POST":
         if request.data == "get":
 	        return getInputs()
-        elif requst.data == "setup":
+        elif request.data == "setup":
             return setupInput()
         else:
             j = json.loads(request.data)
