@@ -9,7 +9,7 @@ function getTriggerHTML(port) {
   str = str + '">Port ' + port + '</option>';
   str = str + "\n" + '</select>';
 
-  if(portType != "touch") {
+  if(portType != "TOUCH") {
     str = str + "\n" + '<select class="compare" id="compare' + triggers + '">';
     str = str + "\n" + '<option value ="greater">Greater than</option>';
     str = str + "\n" + '<option value="less">Less than</option>';
@@ -82,7 +82,7 @@ function run(toSend) {
       var directions = []
       var pairs = document.getElementsByClassName("pair")
 
-      for (i = 0; i < pairs.length; i++) {
+      for (i = pairs.length - 1; i >= 0; i--) {
         var id = pairs[i].id;
         var port = document.getElementById("triggerPort" + id).value;
         var value = parseInt(document.getElementById("triggerValue" + id).value);
