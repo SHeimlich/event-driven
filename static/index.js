@@ -126,10 +126,23 @@ window.onload = function() {
       console.log(x.responseText);
       var j = JSON.parse(x.responseText);
       console.log(j);
+      updateSetup(j.in1, 1);
+      updateSetup(j.in2, 2);
+      updateSetup(j.in3, 3);
+      updateSetup(j.in4, 4);
     }
   }
 
   x.open("POST", "\\", true);
   x.send("setup");
+}
 
+function updateSetup(modes, input) {
+  var element = getElementById("setup" + input);
+  element.innerHTML = "";
+
+  for(int i = 0; i < modes.length, i++) {
+    element.innerHTML += "<option value='" + modes[i] + "'>";
+    element.innerHTML += modes[i] + "</option>";
+  }
 }
