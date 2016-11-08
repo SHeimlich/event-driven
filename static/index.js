@@ -123,13 +123,13 @@ window.onload = function() {
   
   x.onreadystatechange = function() {
     if(this.readyState == 4 && this.status == 200) {
-      console.log(x.responseText);
       var j = JSON.parse(x.responseText);
-      console.log(j);
+      console.log("hello, world!");
       updateSetup(j.in1, 1);
       updateSetup(j.in2, 2);
       updateSetup(j.in3, 3);
       updateSetup(j.in4, 4);
+      console.log("bye");
     }
   }
 
@@ -138,11 +138,11 @@ window.onload = function() {
 }
 
 function updateSetup(modes, input) {
-  var element = getElementById("setup" + input);
+  console.log("hi");
+  var element = document.getElementById("setup" + input);
   element.innerHTML = "";
 
-  for(int i = 0; i < modes.length, i++) {
-    element.innerHTML += "<option value='" + modes[i] + "'>";
-    element.innerHTML += modes[i] + "</option>";
+  for(var i = 0; i < modes.length; i++) {
+    element.innerHTML += "<option value='" + modes[i] + "'>" + modes[i] + "</option>";
   }
 }
