@@ -1,0 +1,16 @@
+Ensure EV3Dev is set up on your EV3.  Follow the “First time?” instructions here: https://github.com/tuftsceeo/IoT/tree/master/EV3.
+
+
+Once you have done that, you will need to install git and download the repository as outlined below:
+sudo apt-get install git
+git config --global user.name "John Doe"
+git config --global user.email johndoe@example.com
+git clone https://github.com/SHeimlich/event-driven.git
+Then, move into the directory git just created:
+cd event-driven
+Then run:
+python2 app2.py
+This gets the server up and running on the ev3.
+
+
+Navigate your browser (I only tested in Firefox, but in theory any browser should work.) to your EV3’s IP address on port 5000.  Using the webpage that appears, you should be able to run the system.
