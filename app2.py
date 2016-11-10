@@ -25,21 +25,30 @@ s4 = ev3.Sensor('in4')
 
 # Get all the inputs and their values in a JSON object.
 def getInputs():
-    return(jsonify({
-        "in1":s1.value(),
-        "in2":s2.value(),
-        "in3":s3.value(),
-        "in4":s4.value()})
-    );
+    r = {"in1":-1, "in2":-1, "in3":-1, "in4":-1};
+    if s1.connected:
+        r["in1"] = s1.value();
+    if s2.connected:
+        r["in2"] = s2.value();
+    if s3.connected:
+        r["in3"] = s3.value();
+    if s4.connected:
+        r["in4"] = s4.value();
+    return(jsonify(r));
 
 # Help setup all the inputs by returning their modes in a JSON object.
 def setupInput():
-    return(jsonify({
-        "in1":s1.modes,
-        "in2":s2.modes,
-        "in3":s3.modes,
-        "in4":s4.modes})
-    );
+    r = {};
+    if s1.connected:
+        r.update({"in1":s1.modes});
+    if s2.connected:
+        r.update({"in2":s2.modes});
+    if s3.connected:
+        r.update({"in3":s3.modes});
+    if s4.connected:
+        r.update({"in4":s4.modes});
+
+    return(jsonify(r));
 
 
 # Set the app's name.
