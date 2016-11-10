@@ -51,14 +51,17 @@ def index():
     print(request.data)
     # If it was a GET request, send the proper HTML document.
     if request.method == "GET":
+        print("GET")
         return render_template('index2.html')
-    # If it was a POST request, determine what time.    
+    # If it was a POST request, determine what type.    
     if request.method == "POST":
         # If it was a "get" request, simple return all the inputs.
         if request.data == "get":
-	        return getInputs()
+	    print("get")    
+            return getInputs()
         # If it was a "setup" request, return the modes of the sensors.
         elif request.data == "setup":
+            print("setup")
             return setupInput()
         # If the code makes it here, a JSON object should have been received.
         else:
@@ -98,3 +101,6 @@ def index():
                     md.stop();
             # Return the current sensor values.
             return getInputs();
+
+if __name__ == '__main__':
+    app.run(debug=True, host='0.0.0.0')
